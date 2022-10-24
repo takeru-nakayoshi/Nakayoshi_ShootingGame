@@ -29,7 +29,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		sceneMng.Update();		//シーンの更新
 		sceneMng.Draw();		//シーンの描画
 
-		if (sceneMng.ChangeScene() != nullptr) {//シーンの変更
+		if (sceneMng.ChangeScene() == nullptr) {//シーンの変更
 			DxLib_End();	
 
 			return 0;

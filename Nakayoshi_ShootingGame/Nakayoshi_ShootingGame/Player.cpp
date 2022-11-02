@@ -1,6 +1,7 @@
 #include "Player.h"
 #include"DxLib.h"
 #include"StraightBullets.h"
+#include"KeyManager.h"
 
 Player::Player(T_Location Location) 
 	: CharaBase(Location, 10.f, T_Location{ 2,2 }), score(0), life(1) {
@@ -12,7 +13,18 @@ Player::Player(T_Location Location)
 
 void Player::Update() {
 	T_Location newLocation = GetLocation();
-	newLocation.x += 1;
+	if (KeyManager::OnkeyPresed(KEY_INPUT_W)) {
+		newLocation.y -= speed.y;
+	}
+	if (KeyManager::OnkeyPresed(KEY_INPUT_S)) {
+		newLocation.y += speed.y;
+	}
+	if (KeyManager::OnkeyPresed(KEY_INPUT_A)) {
+		newLocation.x -= speed.x;
+	}
+	if (KeyManager::OnkeyPresed(KEY_INPUT_D)) {
+		newLocation.x += speed.x;
+	}
 	SetLocation(newLocation);
 	
 	int bulletCount;
@@ -21,11 +33,16 @@ void Player::Update() {
 				break;
 			}
 		bullets[bulletCount]->Update();
+		//‰æ–ÊŠO‚Å’e‚ðÁ‚·
+		if (bullets[bulletCount]->isScreenOut()) {
+			DeleteBullet(bulletCount);
+			bulletCount--;
+		}
 	}
 		
 
 
-	if ((GetMouseInput()&MOUSE_INPUT_LEFT)!=0){
+	if (KeyManager::OnMousePresed(MOUSE_INPUT_LEFT)){
 		if (bulletCount < 30 && bullets[bulletCount] == nullptr) {
 			bullets[bulletCount] = new StraightBullets(GetLocation());
 		}
@@ -42,7 +59,7 @@ void Player::Draw() {
 	}
 
 }
-void Player::Hit() {
+void Player::Hit(int damage) {
 
 }
 bool Player::LifeCheck() {

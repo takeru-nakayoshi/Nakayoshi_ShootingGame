@@ -13,3 +13,7 @@ void StraightBullets::Update() {
 void StraightBullets::Draw() {
 	DrawCircle(GetLocation().x, GetLocation().y, Getradius(), GetColor(0, 255, 0));
 }
+bool StraightBullets::isScreenOut() {
+	bool ret = ((GetLocation().y + Getradius()) <= 0);
+	return ret;
+}

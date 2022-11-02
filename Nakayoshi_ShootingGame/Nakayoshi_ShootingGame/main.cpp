@@ -1,6 +1,7 @@
 #include<DxLib.h>
 #include"SceneManager.h"
 #include"GameMainScene.h"
+#include"KeyManager.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow) {
@@ -26,6 +27,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		
 
 		ClearDrawScreen();		// 画面の初期化
+
+		KeyManager::Update();
+		if (KeyManager::OnMouseClicked(MOUSE_INPUT_LEFT)) {
+			DrawFormatString(210, 200, 0xffffff, "aaa");
+		}
+
 		sceneMng.Update();		//シーンの更新
 		sceneMng.Draw();		//シーンの描画
 

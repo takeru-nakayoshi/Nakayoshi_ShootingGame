@@ -24,7 +24,7 @@ void Enemy::Hit(int damage) {
 		}
 	}
 }
-bool Enemy::HpCHeck() {
+bool Enemy::HpCheck() {
 	bool ret = (hp <= 0);
 	return ret;
 }

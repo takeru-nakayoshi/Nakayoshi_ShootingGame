@@ -28,7 +28,7 @@ void GameMainScene::Update() {
 		}
 		enemy[EnemyCount]->Update();
 	}
-
+	
 	
 	BulletsBase** bullet = player->GetBullets();
 	for (EnemyCount = 0; EnemyCount < 10; EnemyCount++) {
@@ -39,16 +39,19 @@ void GameMainScene::Update() {
 			
 			if (bullet[bulletCount] == nullptr)
 				break;
-
+	
 			if (enemy[EnemyCount]->HitSphere(bullet[bulletCount])) {
 				//エネミーにプレイヤーの弾がヒットしてる
-
+	
 				//エネミーにダメージを与える
 				enemy[EnemyCount]->Hit(bullet[bulletCount]->GetDamge());
 				//弾を削除します
 				player->DeleteBullet(bulletCount);
 				bulletCount--;
 				//エネミーのHPが0以下だったら、エネミーを削除
+				if (enemy[EnemyCount]->HpCheck()) {
+
+				}
 			}
 		}
 	}
